@@ -13,6 +13,7 @@
 local pm_status = true --power menu displayed
 local bm_status = false --bar menu displayed
 local version = "v1.0.1" --software version
+local config_file = "WDS/CORE/config"
 
 --table starters
 local page = {}
@@ -44,7 +45,7 @@ local x_size, y_size = term.getSize()
 --each setting. Descriptions of settings are listed
 --below.
 function set_config()
-  f_config = io.open("WDS/CORE/config", "w")
+  f_config = io.open(config_file, "w")
   
   --Line 2: Version
   f_config:write("Line 2: Version\n")
@@ -77,7 +78,7 @@ end
 
 --Reads setting from config file.
 function get_config()
-  f_config = io.open("WDS/CORE/config", "r")
+  f_config = io.open(config_file, "r")
   
   --read in config
   local file_in = {}
@@ -126,7 +127,7 @@ end
 --Checks for config file and creates new one if
 --missing, else loads config settings.
 function check_config()
-  if fs.exists("WDS/CORE/config") then
+  if fs.exists(config_file) then
     get_config()
   else
     create_config()
